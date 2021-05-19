@@ -106,8 +106,11 @@ export const AnimationVariables: IAnimationVariables = {
 };
 
 /**
- * All Fabric standard animations, exposed as json objects referencing predefined
+ * All Fluent standard animations, exposed as json objects referencing predefined
  * keyframes. These objects can be mixed in with other class definitions.
+ *
+ * The objects are exposed as getters so that the keyframes are registered on demand, ensuring that classname
+ * collisions that could happen while doing server-side rendering due to side effects are avoided.
  */
 export const AnimationStyles: IAnimationStyles = {
   get slideRightIn10() {
