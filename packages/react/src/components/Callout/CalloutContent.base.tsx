@@ -28,13 +28,6 @@ import { classNamesFunction } from '../../Utilities';
 import { AnimationClassNames } from '../../Styling';
 import { useMergedRefs, useAsync, useConst, useTarget } from '@fluentui/react-hooks';
 
-const ANIMATIONS: { [key: number]: string | undefined } = {
-  [RectangleEdge.top]: AnimationClassNames.slideUpIn10,
-  [RectangleEdge.bottom]: AnimationClassNames.slideDownIn10,
-  [RectangleEdge.left]: AnimationClassNames.slideLeftIn10,
-  [RectangleEdge.right]: AnimationClassNames.slideRightIn10,
-};
-
 const getClassNames = classNamesFunction<ICalloutContentStyleProps, ICalloutContentStyles>({
   disableCaching: true, // disabling caching because stylesProp.position mutates often
 });
@@ -465,6 +458,16 @@ export const CalloutContentBase: React.FunctionComponent<ICalloutProps> = React.
       hostElement,
       targetRef,
       targetWindow,
+    );
+
+    const ANIMATIONS: { [key: number]: string | undefined } = React.useMemo(
+      () => ({
+        [RectangleEdge.top]: AnimationClassNames.slideUpIn10,
+        [RectangleEdge.bottom]: AnimationClassNames.slideDownIn10,
+        [RectangleEdge.left]: AnimationClassNames.slideLeftIn10,
+        [RectangleEdge.right]: AnimationClassNames.slideRightIn10,
+      }),
+      [],
     );
 
     useAutoFocus(props, positions, calloutElement);
